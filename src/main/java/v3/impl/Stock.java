@@ -1,29 +1,25 @@
 package v3.impl;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import v3.IInventory;
 import v3.IStock;
-import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Setter
 public class Stock implements IStock {
 
-    private List<IInventory> inventoryItemList;
-
-    public Stock() {
-        inventoryItemList = new ArrayList<>();
-    }
-
-    public Stock(List<IInventory> inventoryItemList) {
-        this.inventoryItemList = inventoryItemList;
-    }
+    List<IInventory> inventoryItemList;
 
     @Override
     public List<IInventory> getInventoryItemList() {
         return inventoryItemList;
-    }
-
-    public void setInventoryItemList(List<IInventory> inventoryItemList) {
-        this.inventoryItemList = inventoryItemList;
     }
 
     @Override

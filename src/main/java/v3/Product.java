@@ -1,14 +1,19 @@
 package v3;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import java.math.BigDecimal;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
-
-    private int id;
-
-    private String name;
-
-    private BigDecimal price;
 
     public static int COUNT_FOR_DISCOUNT = 5;
 
@@ -16,47 +21,11 @@ public class Product {
 
     public static int maxSpace3;
 
-    private BigDecimal percentDiscount;
+    int id;
 
-    public Product() {
-    }
+    String name;
 
-    public Product(int id, String name, BigDecimal price, BigDecimal percentDiscount) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.percentDiscount = percentDiscount;
-    }
+    BigDecimal price;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public BigDecimal getPercentDiscount() {
-        return percentDiscount;
-    }
-
-    public void setPercentDiscount(BigDecimal percentDiscount) {
-        this.percentDiscount = percentDiscount;
-    }
+    BigDecimal percentDiscount;
 }

@@ -1,16 +1,17 @@
 package v3;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import java.math.BigDecimal;
 
+@NoArgsConstructor
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Item {
-
-    private int count;
-
-    private Product product;
-
-    private BigDecimal discount;
-
-    private BigDecimal total;
 
     public static int MAX_COUNT_LENGTH;
 
@@ -36,45 +37,18 @@ public class Item {
 
     public static final String BETWEEN_BLANK = "  ";
 
-    public Item() {
-    }
+    int count;
+
+    Product product;
+
+    BigDecimal discount;
+
+    BigDecimal total;
 
     public Item(int count,
                 Product product) {
         this.count = count;
         this.product = product;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
     }
 
     public void showInfo(String middleSpace) {

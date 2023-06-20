@@ -1,16 +1,17 @@
 package v3;
 
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class Receipt {
-
-    private static final String name = "CASH RECEIPT";
-
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
-
-    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
     public static final int WIDTH = 50; // ширина чека постоянное значение
 
@@ -18,29 +19,19 @@ public class Receipt {
 
     public static final String BORDER_BLANK = " ";
 
-    private Contact contact;
+    static final String name = "CASH RECEIPT";
 
-    private ICashier cashier;
+    static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
-    private Date date;
+    static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
-    private IOrder order;
+    Contact contact;
 
-    public Contact getContact() {
-        return contact;
-    }
+    ICashier cashier;
 
-    public ICashier getCashier() {
-        return cashier;
-    }
+    Date date;
 
-    public Date getDate() {
-        return date;
-    }
-
-    public IOrder getOrder() {
-        return order;
-    }
+    IOrder order;
 
     public void calculateSpacesForReceipt() {
         List<Item> itemList = order.getItemList();
@@ -166,38 +157,5 @@ public class Receipt {
         count = WIDTH - BORDER_LINE.length() - BORDER_BLANK.length() - str.length();
         String rightBlanksFromName = Util.getCalcSpace(count, ' ');
         return String.format("%s%s%s%s", str, rightBlanksFromName, BORDER_BLANK, BORDER_LINE);
-    }
-
-    public static class Builder {
-
-        private final Receipt receipt;
-
-        public Builder() {
-            receipt = new Receipt();
-        }
-
-        public Builder contact(Contact contact) {
-            receipt.contact = contact;
-            return this;
-        }
-
-        public Builder cashier(ICashier cashier) {
-            receipt.cashier = cashier;
-            return this;
-        }
-
-        public Builder date(Date date) {
-            receipt.date = date;
-            return this;
-        }
-
-        public Builder order(IOrder order) {
-            receipt.order = order;
-            return this;
-        }
-
-        public Receipt build() {
-            return receipt;
-        }
     }
 }

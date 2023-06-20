@@ -1,32 +1,37 @@
 package v3.impl;
 
-import v3.*;
-
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+import v3.IOrder;
+import v3.Item;
+import v3.Product;
+import v3.Receipt;
+import v3.Util;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Order implements IOrder {
 
-    private List<Item> itemList;
+    static Scanner sc = new Scanner(System.in);
 
-    private BigDecimal taxableTotal;
+    List<Item> itemList;
 
-    private BigDecimal totalDiscount;
+    BigDecimal taxableTotal;
 
-    private BigDecimal vat;
+    BigDecimal totalDiscount;
 
-    private BigDecimal total;
+    BigDecimal vat;
 
-    private static Scanner sc;
-
-    public Order() {
-        sc = new Scanner(System.in);
-    }
+    BigDecimal total;
 
     public Order(List<Item> itemList) {
-        sc = new Scanner(System.in);
         this.itemList = itemList;
         calculateTotalPriceForEveryItem();
         this.taxableTotal = calculateTaxableTotal();
@@ -64,17 +69,9 @@ public class Order implements IOrder {
         return itemList;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
-
     @Override
     public BigDecimal getTaxableTotal() {
         return taxableTotal;
-    }
-
-    public void setTaxableTotal(BigDecimal taxableTotal) {
-        this.taxableTotal = taxableTotal;
     }
 
     @Override
@@ -87,21 +84,9 @@ public class Order implements IOrder {
         return vat;
     }
 
-    public void setVat(BigDecimal vat) {
-        this.vat = vat;
-    }
-
-    public void setTotalDiscount(BigDecimal totalDiscount) {
-        this.totalDiscount = totalDiscount;
-    }
-
     @Override
     public BigDecimal getTotal() {
         return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
     }
 
     @Override

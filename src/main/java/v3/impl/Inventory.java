@@ -1,41 +1,34 @@
 package v3.impl;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import v3.IInventory;
 import v3.Product;
 import v3.Util;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Inventory implements IInventory {
-
-    private Product product;
-
-    private int count;
 
     public static int maxSpace;
 
-    public Inventory() {
-    }
+    Product product;
 
-    public Inventory(Product product, int count) {
-        this.product = product;
-        this.count = count;
-    }
+    int count;
 
     @Override
     public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     @Override
     public int getCount() {
         return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     @Override

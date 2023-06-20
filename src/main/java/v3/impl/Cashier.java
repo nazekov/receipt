@@ -1,32 +1,35 @@
 package v3.impl;
 
-import v3.*;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+import v3.Contact;
+import v3.ICashier;
+import v3.IShop;
+import v3.IStock;
+import v3.Item;
+import v3.Receipt;
+import v3.Util;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+@NoArgsConstructor
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Cashier implements ICashier {
 
-    private String name;
+    static Scanner sc = new Scanner(System.in);
 
-    private IShop shop;
+    String name;
 
-    private IStock stock;
+    IShop shop;
 
-    private Receipt receipt;
+    IStock stock;
 
-    private Scanner sc;
-
-    public Cashier() {
-    }
-
-    public Cashier(Shop shop) {
-        name = "E1520";
-        this.shop = shop;
-        this.stock = shop.getIStock();
-        sc = new Scanner(System.in);
-    }
+    Receipt receipt;
 
     @Override
     public String getName() {
@@ -38,26 +41,14 @@ public class Cashier implements ICashier {
         return receipt;
     }
 
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
-    }
-
     @Override
     public IShop getShop() {
         return shop;
     }
 
-    public void setShop(IShop shop) {
-        this.shop = shop;
-    }
-
     @Override
     public IStock getShopStock() {
         return stock;
-    }
-
-    public void setShopStock(IStock stock) {
-        this.stock = stock;
     }
 
     @Override
@@ -71,7 +62,7 @@ public class Cashier implements ICashier {
         Order order = new Order(itemList);
         shop.increaseBalance(order.getTotal()); // пополняем баланс магазина
 
-        Receipt receipt = new Receipt.Builder()
+        Receipt receipt = Receipt.builder()
             .contact(contact)
             .cashier(this)
             .date(new Date())
